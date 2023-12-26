@@ -52,8 +52,7 @@ def delete_media():
 def graceful_exit():
     gopro.gpTurbo(constants.off)
     gopro.power_off()
-    func = request.environ.get('werkzeug.server.shutdown')
-    if func is None:
+    if (func := request.environ.get('werkzeug.server.shutdown')) is None:
         raise RuntimeError('Not running with the Werkzeug Server')
     func()
     return ("",200)
